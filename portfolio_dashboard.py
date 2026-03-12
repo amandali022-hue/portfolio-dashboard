@@ -300,7 +300,7 @@ def chart_today_bar(df):
     ))
     fig.add_hline(y=0,line_color=GRID,line_width=1)
     fig.update_layout(**base_layout(230),
-        xaxis=ax(showgrid=False,tickfont=dict(size=9,color="#9aa5b8")),
+        xaxis=ax(showgrid=False),
         yaxis=ax(ticksuffix="%",zeroline=False))
     return fig
 
@@ -692,7 +692,7 @@ def chart_target_vs_actual(df_view: pd.DataFrame, targets: dict) -> go.Figure:
     fig.update_layout(
         **base_layout(300),
         barmode="group",
-        xaxis=ax(showgrid=False, tickangle=-30, tickfont=dict(size=9, color="#9aa5b8")),
+        xaxis=ax(showgrid=False, tickangle=-30),
         yaxis=ax(ticksuffix="%", zeroline=False),
         showlegend=True,
         legend=dict(font=dict(size=10, color="#9aa5b8"), bgcolor="rgba(0,0,0,0)",
