@@ -491,7 +491,7 @@ BUILD: v4.0.0<br>LIVE DATA: Yahoo Finance<br>REFRESH: every 60s<br>{now.strftime
 
     # ── KPI strip ──────────────────────────────────────────────────────────────
     sp = "+" if total_gl  >= 0 else ""; p_cls = "pos" if total_gl  >= 0 else "neg"
-    st = "+" if today_pnl >= 0 else ""; t_cls = "pos" if today_pnl >= 0 else "neg"
+    tp = "+" if today_pnl >= 0 else ""; t_cls = "pos" if today_pnl >= 0 else "neg"
     st.markdown(f"""<div class="kpi-strip">
       <div class="kpi-cell c1">
         <div class="kl">TOTAL MARKET VALUE</div>
@@ -505,8 +505,8 @@ BUILD: v4.0.0<br>LIVE DATA: Yahoo Finance<br>REFRESH: every 60s<br>{now.strftime
       </div>
       <div class="kpi-cell c3">
         <div class="kl">TODAY P&amp;L</div>
-        <div class="kv {t_cls}">{st}${today_pnl:,.0f}</div>
-        <div class="ks {t_cls}">{st}{today_pct:.2f}%</div>
+        <div class="kv {t_cls}">{tp}${today_pnl:,.0f}</div>
+        <div class="ks {t_cls}">{tp}{today_pct:.2f}%</div>
       </div>
       <div class="kpi-cell c4">
         <div class="kl">TOTAL BOOK COST</div>
