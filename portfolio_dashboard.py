@@ -230,7 +230,9 @@ def base_layout(h=280, **kw):
                 **kw)
 
 def ax(**kw):
-    return dict(gridcolor=GRID,zerolinecolor=GRID,tickfont=dict(size=9,color="#5a6478"),**kw)
+    base = dict(gridcolor=GRID, zerolinecolor=GRID, tickfont=dict(size=9, color="#5a6478"))
+    base.update(kw)   # kw wins — no duplicate-key TypeError
+    return base
 
 def chart_sector_donut(df):
     g = df.groupby("Sector")["Market Value"].sum().reset_index().sort_values("Market Value",ascending=False)
@@ -471,12 +473,6 @@ BUILD: v4.0.0<br>LIVE DATA: Yahoo Finance<br>REFRESH: every 60s<br>{now.strftime
     pos_count  = (df_view["Gain/Loss $"] > 0).sum()
 
     # ── Warn about failed tickers ──────────────────────────────────────────────
-    if failed_symbols:
-        st.markdown(f"""<div class="warn">
-        ⚠️ 以下 symbol 无法从 Yahoo Finance 获取价格（价格显示为 0）：
-        <b>{", ".join(failed_symbols)}</b><br>
-        <span style="color:#8c6400">可能原因：交易所休市 / ticker 格式不同 / Yahoo Finance 暂时不可用</span>
-        </div>""", unsafe_allow_html=True)
 
 
     # ── Terminal header ────────────────────────────────────────────────────────
@@ -1041,9 +1037,6 @@ BUILD: v5.0.0<br>LIVE: Yahoo Finance (60s)<br>{now.strftime('%Y-%m-%d %H:%M')} U
     # TAB 1 — PORTFOLIO OVERVIEW (original v4 content)
     # ════════════════════════════════════════════════════════
     with tab1:
-        if failed_symbols:
-            st.markdown(f"""<div class="warn">⚠️ 无法从 Yahoo Finance 获取价格：
-            <b>{", ".join(failed_symbols)}</b></div>""", unsafe_allow_html=True)
 
 
         st.markdown(f"""<div class="thdr">
